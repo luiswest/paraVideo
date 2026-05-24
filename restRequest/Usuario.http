@@ -1,0 +1,26 @@
+# Resetear contraseña
+PATCH http://localhost:9000/api/usuario/passw/reset/7-1234-5665
+
+
+###
+
+PATCH http://localhost:9000/api/usuario/passw/7-1234-5665
+Content-Type: application/json
+
+{
+    "passw"  : "7-1234-5665",
+    "passwN" : "luis"
+}
+
+###
+
+PATCH http://localhost:8000/api/usuario/rol/7-1234-5665
+Content-Type: application/json
+
+{
+    "rol"  : 3
+}
+###
+GET http://localhost:9000/api/usuario/buscar/7-1234-5665
+
+###

@@ -1,0 +1,21 @@
+<header class="h-13 flex items-center justify-between bg-gray-200">
+    
+    <div class="empresa flex ml-4">
+        <div class="logo">YYY</div>
+        <img src="../../../../public/assest/logo.jpg" alt="">
+        <div class="titulo">Elenctrónica</div>
+    </div>
+    <div class="me-4 flex">
+        <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger class="cursor-pointer 
+            px-1.25 py-0.5 rounded-full hover:bg-gray-300 active:border-2 active:border-gray-400">
+            <mat-icon>person</mat-icon>
+        </button>
+        <!--<span>{{srvAuth.userActualS().nombre}}</span>-->
+    </div>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item >Iniciar Sesión</button>
+        <button mat-menu-item >Cerrar Sesión</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>Cambiar Contraseña</button>
+    </mat-menu>
+</header>

@@ -1,0 +1,29 @@
+@host = http://localhost:8000/api
+@uri = {{host}}/mecanico
+GET {{uri}}
+
+###
+
+POST {{uri}}
+Content-Type: application/json
+
+{
+    "cedula" : "2131-2223", 
+    "nombre" : "María West Cooperz", 
+    "especialidad" : "maryzz@gmail.com"
+}
+###
+PUT {{uri}}/3
+Content-Type: application/json
+
+{
+    "cedula" : "2131-2222", 
+    "nombre" : "Maria Cooper Suazo", 
+    "especialidad" : "maryc@gmail.com"
+}
+
+###
+DELETE {{uri}}/5
+
+###
+GET {{uri}}/filter/0/5?cedula=&nombre=ma

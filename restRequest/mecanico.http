@@ -1,0 +1,18 @@
+@host = http://localhost:9000/api
+@uri = {{host}}/cliente
+@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsb2NhbGhvc3QiLCJpYXQiOjE3Nzg0NjE5NDcsImV4cCI6MTc3ODQ2MTk5Miwic3ViIjoiMjEzMS0yMjIzIiwicm9sIjoyLCJub20iOiJNYXJcdTAwZWRhIFdlc3QgQ29vcGVyeiJ9.lREMLbC_MEqyGnTUEfgqQJB7M858YEA1J9UXY8ZlaMk
+
+GET {{uri}}
+Authorization: Bearer {{token}}
+###
+
+POST {{uri}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+ {
+    "cedula": "7-1234-5665",
+    "nombre": "Jazlyne West Cooper",
+    "telefono": "8888-7777",
+    "email": "jazlyne.west@email.com"
+  }

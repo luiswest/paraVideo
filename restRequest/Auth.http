@@ -1,0 +1,17 @@
+@host = http://localhost:9000/api
+@uri =  {{host}}/auth
+# Request para iniciar sesión
+PATCH {{uri}}
+Content-Type: application/json
+
+{
+    "cedula"  : "7-1234-5665",
+    "passw" : "7-1234-5665"
+}
+
+###
+
+PATCH {{uri}}/logout/7-1234-5665
+
+
+###

@@ -1,0 +1,31 @@
+@host = http://localhost:9000/api
+@uri = {{host}}/cliente
+GET {{uri}}
+
+###
+
+POST {{uri}}
+Content-Type: application/json
+
+{
+    "cedula" : "2777-1888", 
+    "nombre" : "Mayron West Grant", 
+    "telefono": "7-888-675", 
+    "email" : "mayron@westg"
+}
+###
+PUT {{uri}}/15
+Content-Type: application/json
+
+{
+    "cedula": "2777-1555",
+    "nombre": "Mayron West Grant",
+    "telefono": "7-888-671",
+    "email": "mayron@westg"
+}
+
+###
+DELETE {{uri}}/15
+
+###
+GET {{uri}}/filter/0/5?cedula=&nombre=joyce

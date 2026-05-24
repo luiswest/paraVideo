@@ -1,0 +1,58 @@
+
+<section class="flex">
+  <mat-toolbar class="header">
+        <button matIconButton 
+              class="botonMenu"    
+        (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>    
+            <div class="me-4 flex">
+        <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger class="botonMenu">
+            <mat-icon>person</mat-icon>
+        </button>
+        <!--<span>{{srvAuth.userActualS().nombre}}</span>-->
+    </div>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item >Iniciar Sesión</button>
+        <button mat-menu-item >Cerrar Sesión</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>Cambiar Contraseña</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav">
+      <mat-nav-list>
+        <mat-list-item>
+          <mat-icon>home</mat-icon>
+          Item 1
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>group</mat-icon>
+          Item 2
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>engineering</mat-icon>
+          Item 2
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>handyman</mat-icon>
+          Item 2
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>contacts</mat-icon>
+          Item 2
+        </mat-list-item>            
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-clientes></app-clientes>
+      <router-outlet />
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <mat-toolbar class="footer">Footer</mat-toolbar>
+    
+
+    
+</section>

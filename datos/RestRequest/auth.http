@@ -1,0 +1,16 @@
+@host = http://localhost:8000/api
+@uri = {{host}}/auth
+
+PATCH {{uri}} 
+Content-Type: application/json
+
+{
+    "cedula" : "1999-8888", 
+    "passw" : "1999-8888" 
+}
+
+###
+
+DELETE {{uri}}/1999-8888
+
+###
