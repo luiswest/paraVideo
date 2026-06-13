@@ -16,3 +16,6 @@ Content-Type: application/json
     "telefono": "8888-7777",
     "email": "jazlyne.west@email.com"
   }
+###
+GET {{uri}}/filter/0/10?cedula=&nombre=
+Authorization: Bearer {{token}} 

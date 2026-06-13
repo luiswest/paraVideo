@@ -58,8 +58,8 @@ class Cliente extends ServicioCurl {
     public function filter(Request $request, Response $response, array $args) {
         
         $datos = http_build_query($request->getQueryParams());
-
-        $uri = self::ENDPOINT . "/filter/{args['pag']/{args['lim']}?" . $datos;
+        
+         $uri = self::ENDPOINT . "/filter/{$args['pag']}/{$args['lim']}?" . $datos;
         
 
         $resp = $this->ejecutar( $uri, 'GET');

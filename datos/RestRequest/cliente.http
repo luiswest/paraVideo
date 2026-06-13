@@ -28,4 +28,4 @@ Content-Type: application/json
 DELETE {{uri}}/25
 
 ###
-GET {{uri}}/filter/0/5?cedula=&nombre=joyce
+GET {{uri}}/filter/0/100?cedula=&nombre=

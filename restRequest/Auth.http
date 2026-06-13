@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "cedula"  : "7-1234-5665",
-    "passw" : "7-1234-5665"
+    "passw" : "luis"
 }
 
 ###

@@ -1,0 +1,59 @@
+<h2 mat-dialog-title class="py-5! text-center font-bold!">{{titulo}}</h2>
+<mat-divider class="border-2"></mat-divider>
+<mat-dialog-content>
+    <form id="frmCliente" [formGroup]="miForm" (ngSubmit)="onGuardar();">
+        <div class="flex flex-col">
+<!--            @if (miForm.value.id_cliente !== 0) {-->
+                <mat-form-field [hidden]="miForm.value.id_cliente === 0">
+                    <mat-label>Id Cliente</mat-label>
+                    <input matInput formControlName="id_cliente" readonly>
+                </mat-form-field>
+<!--            }-->
+            <mat-form-field>
+                <mat-label>Cedula</mat-label>
+                <input matInput formControlName="cedula">
+            </mat-form-field>
+            @if (miForm.controls['cedula'].touched && miForm.controls['cedula'].invalid) {
+                @if (F['cedula'].errors!['required']) {
+                    <mat-error>El campo cédula es requerido</mat-error>
+                }
+                @if (F['cedula'].errors!['pattern']) {
+                    <mat-error>Formato de cédula o dimex incorrecto</mat-error>
+                }
+            }
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre">
+            </mat-form-field>
+            @if (miForm.controls['nombre'].touched && miForm.controls['nombre'].invalid) {
+                @if (F['nombre'].errors!['required']) {
+                    <mat-error>El campo nombre es obligatorio</mat-error>
+                }
+                @if (F['nombre'].errors!['minLength'] || F['nombre'].errors!['maxLength'] ) {
+                    <mat-error>El nombre debe tene entre 5 y 50 caracteres</mat-error>
+                }                
+                @if (F['nombre'].errors!['pattern']) {
+                    <mat-error>Formato de nombre incorrecto</mat-error>
+                }
+            }
+
+            <mat-form-field>
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="telefono">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Correo</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-divider class="border-2"></mat-divider>
+<mat-dialog-actions class="py-5!">
+    <button matFab extended disabled="false" type="submit" form="frmCliente" [disabled]=miForm.invalid>
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+    <button matFab extended [mat-dialog-close]="false">
+        <mat-icon>cancel</mat-icon> Cerrar
+    </button>
+</mat-dialog-actions>

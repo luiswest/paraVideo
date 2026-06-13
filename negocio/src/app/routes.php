@@ -44,3 +44,15 @@ $app->group('/api', function(RouteCollectorProxy $api) {
         $endpoint->get('/buscar/{id}', Usuario::class . ':buscar');
     });
 });
+
+$app->get('/swagger', function ($request, $response) {
+    return $response
+        ->withHeader('Location', '/swagger.html')
+        ->withStatus(302);
+});
+
+$app->get('/openapi.json', function ($request, $response) {
+    $json = file_get_contents(__DIR__ . '/../../public/openapi.json');
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json');
+});

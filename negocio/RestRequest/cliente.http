@@ -8,7 +8,7 @@ POST {{uri}}
 Content-Type: application/json
 
 {
-    "cedula" : "2777-1888", 
+    "cedula" : "2777-1811", 
     "nombre" : "Mayron West Grant", 
     "telefono": "7-888-675", 
     "email" : "mayron@westg"

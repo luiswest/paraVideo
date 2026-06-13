@@ -18,9 +18,9 @@ class Cliente  {
         $sql = "SELECT * FROM clientes ";
 
         if (isset($args['id'])) {
-            $sql .= "WHERE id_cliente = :id ";
+            $sql .= "WHERE id_cliente = :id ;";
         }
-        $sql .= 'LIMIT 0, 10;';
+       // $sql .= 'LIMIT 0, 10;';
 
         $con = $this->container->get('base_datos');
         $query = $con->prepare($sql);
@@ -172,8 +172,10 @@ class Cliente  {
         
         $datos = $request->getQueryParams();
        
-        $sql = "SELECT * FROM clientes 
-            WHERE cedula LIKE :cedula AND nombre LIKE :nombre;";
+        $sql = "SELECT *, COUNT(*) OVER() as total FROM clientes 
+            WHERE cedula LIKE :cedula AND nombre LIKE :nombre ";
+        $sql .= "LIMIT :offset, :limit;";
+
 
         $con = $this->container->get('base_datos');
         try {
@@ -183,14 +185,37 @@ class Cliente  {
                 $value = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
                 $query->bindValue($key, "%$value%", PDO::PARAM_STR);
             }
-            $query->execute();
-            $res = $query->fetchAll();
+            $pag = $args['pag'] > 0 ? ($args['pag'] * $args['lim']) : 0;
 
-            $status = $query->rowCount() > 0 ? 200 : 204;
+            $query->bindValue('offset', (int)$pag, PDO::PARAM_INT);
+            $query->bindValue('limit', (int)$args['lim'], PDO::PARAM_INT);
+            $query->execute();
+            $data = $query->fetchAll(PDO::FETCH_OBJ);
+            //var_dump($data);die();
+
+            $total = $data[0]->total ?? 0;
+
+            $data = array_map(function($item) {
+                unset($item->total);
+                return $item;
+            }, $data);
+       
+/*
+            foreach ($data as $key => $value) {
+                unset($data[$key]->total);
+            }
+
+*/
+
+            $res['data'] = $data;
+            $res['totalRegistros'] = $total;
+
+            $status = $total > 0 ? 200 : 204;
+
         } catch(\PDOException $e) {
             $status =  500;
-            //$res = ["msg" => $e->getMessage(), "codigo" => $e->getCode()];
-            $res = ["msg" => "Se detecto error en tiempo de ejecución"];
+                $res = ["msg" => $e->getMessage(), "codigo" => $e->getCode()];
+            //$res = ["msg" => "Se detecto error en tiempo de ejecución"];
         }
         $query = null;
         $con = null;
