@@ -11,6 +11,8 @@ import { MatListModule } from '@angular/material/list';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Login } from './components/login/login';
+
 ;
 
 type MenuItem = {
@@ -28,7 +30,7 @@ type MenuItem = {
     MatSidenavModule,
     MatCheckboxModule, MatFormFieldModule,
     MatIconModule, MatDividerModule, MatListModule,
-    MatTableModule, MatTooltipModule],
+    MatTableModule, MatTooltipModule, Login],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

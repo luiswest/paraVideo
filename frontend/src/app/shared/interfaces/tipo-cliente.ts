@@ -5,3 +5,4 @@ export interface TipoCliente {
   telefono: number;
   email: string;    
 }
+
