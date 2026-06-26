@@ -1,0 +1,48 @@
+<section class="flex">
+    <mat-toolbar class="header" [hidden]="!this.authService.isLoggedIn()">
+        <button matIconButton class="botonMenu" (click)="sidenav.toggle();"
+                [matTooltip]="sidenav.opened ? 'Cerrar menu' : 'Abrir menu'">
+                <mat-icon>menu</mat-icon>
+        </button>
+        <div class="me-4 flex">
+            <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger class="botonMenu">
+                <mat-icon>person</mat-icon>
+            </button>
+        </div>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/login']" [hidden]="this.authService.isLoggedIn()">Iniciar Sesión</button>
+            <button mat-menu-item (click)="logOut();">Cerrar Sesión</button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item [routerLink]="['/changePassw']">Cambiar contraseña</button>
+        </mat-menu>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="container">
+        <mat-sidenav #sidenav mode="side" [opened]="this.authService.isLoggedIn()" class="sidenav">
+            <mat-nav-list>
+                @for(item of menuItems(); track item.label) {
+                    <mat-list-item [hidden]="!item.rol.includes(this.authService.userActualS().rol)">
+                        <a href="" [routerLink]="item.route">
+                            <mat-icon>{{item.icon}}</mat-icon>
+                            {{item.label}}
+                        </a>
+                    </mat-list-item>
+                }
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet />
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+    <mat-toolbar class="footer">
+        <span class="font-bold! text-[0.65rem]!">
+            @2026 Taller Automotriz. Todos los derechos reservados.
+        </span>
+    </mat-toolbar>
+
+</section>
+
+

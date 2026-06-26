@@ -1,0 +1,47 @@
+<form [formRoot] = "frmPassw">
+    <mat-card>
+        <mat-card-header class="h-15 flex item-center, justify-center mb-4 bg-blue-700 text-white">
+            <mat-card-title>Cambiar ContraseñaLogin</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="flex flex-col">
+                <mat-form-field appearance="fill" class="mt-4 mx-5">
+                    <mat-label>Contraseña Actual</mat-label>
+                    <input type="password" matInput [formField]="frmPassw.passw" (focus)="mostrarError.set(false);">
+                </mat-form-field>
+                @if(frmPassw.passw().touched() && frmPassw.passw().invalid()) {
+                    @for(error of frmPassw.passw().errors(); track error.kind ) {
+                        <mat-error class="ml-5">{{error.message}}</mat-error>
+                    }
+                }
+                <mat-form-field appearance="fill" class="mt-4 mx-5">
+                    <mat-label>Nueva Contraseña</mat-label>
+                    <input type="password" matInput [formField]="frmPassw.passwN" (focus)="mostrarError.set(false);">
+                </mat-form-field>
+                @if(frmPassw.passwN().touched() && frmPassw.passwN().invalid()) {
+                    @for(error of frmPassw.passwN().errors(); track error.kind ) {
+                        <mat-error class="ml-5">{{error.message}}</mat-error>
+                    }
+                }
+               <mat-form-field appearance="fill" class="mt-4 mx-5">
+                    <mat-label>Repetir Contraseña</mat-label>
+                    <input type="password" matInput [formField]="frmPassw.passwR" (focus)="mostrarError.set(false);">
+                </mat-form-field>
+                @if(frmPassw.passwR().touched() && frmPassw.passwR().invalid()) {
+                    @for(error of frmPassw.passwR().errors(); track error.kind ) {
+                        <mat-error class="ml-5">{{error.message}}</mat-error>
+                    }
+                }                 
+            </div>
+            <mat-error class="text-center" [hidden]="!mostrarError()">Usuario o contraseña incorrecto</mat-error>
+        </mat-card-content>
+        
+        <mat-card-actions class="mb-5">
+            <button type="submit" matFab extended  class="flex flex-1 mx-7 bg-emerald-600! text-white!"
+                [disabled]="frmPassw().invalid()">
+                Cambiar
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+
