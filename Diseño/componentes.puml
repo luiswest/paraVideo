@@ -1,0 +1,41 @@
+@startuml
+skinparam componentStyle uml2
+
+package "Capa de Presentación (Clientes REST)" {
+    [Aplicación Móvil (Android/iOS)] as Mobile
+    [Aplicación Web (SPA)] as Web
+}
+
+package "Capa de Lógica / API REST (Backend)" {
+    interface "JSON / HTTPS" as API_Interface
+    
+    component "Controlador de Clientes" as ClienteCtrl
+    component "Controlador de Vehículos" as VehiculoCtrl
+    component "Controlador de Reparaciones" as ReparacionCtrl
+    
+    component "Servicio de Negocio" as BizLogic
+}
+
+package "Capa de Acceso a Datos" {
+    component "Módulo de Persistencia (ORM/DAO)" as Persistence
+    database "PostgreSQL / MySQL" as DB
+}
+
+' Relaciones de consumo de servicios
+Mobile ..> API_Interface : HTTP Request
+Web ..> API_Interface : HTTP Request
+
+' Exposición de Endpoints
+API_Interface -- ClienteCtrl
+API_Interface -- VehiculoCtrl
+API_Interface -- ReparacionCtrl
+
+' Flujo interno del servidor
+ClienteCtrl --> BizLogic
+VehiculoCtrl --> BizLogic
+ReparacionCtrl --> BizLogic
+
+BizLogic --> Persistence
+Persistence --> DB
+
+@endum

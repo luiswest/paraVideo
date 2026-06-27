@@ -11,6 +11,15 @@ Content-Type: application/json
 
 ###
 
+PATCH {{uri}}/refresh/818181812
+Content-Type: application/json
+
+{
+    "tkRef" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsb2NhbGhvc3QiLCJpYXQiOjE3ODIwNzM0NDQsInJvbCI6M30.EYxoypu2TMgySlZoKnngF83G081DuLDO-2RidCRFp9Y"
+}
+
+###
+
 PATCH {{uri}}/logout/7-1234-5665
 
 

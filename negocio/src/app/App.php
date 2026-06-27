@@ -19,7 +19,9 @@ $app = AppFactory::create();
 
 $rules = [
   new RequestMethodRule(ignore: ['OPTIONS']),
-  new RequestPathRule(paths: ['/api'], ignore: ['/api/auth', '/api/usuario', '/api/cliente', '/api/vehiculo', '/api/reparacion'])
+  new RequestPathRule(
+    paths: ['/api'], 
+    ignore: ['/api/auth'])
 ];
 
 // Register Authentication Middleware

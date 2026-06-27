@@ -21,7 +21,7 @@ export class AuthService {
   private readonly srvTokens = inject(TokensService);
   private router = inject(Router);
 
-  public login(datos : LoginForm): Observable<any> {
+  public login(datos : LoginForm): Observable<boolean | number> {
     //Iniciar sesión
     return this.http
       .patch<any>(API_URL, datos)
@@ -49,7 +49,7 @@ export class AuthService {
       this.doLogout();
     }    
   }
-  public doLogin(tokens : IToken) {
+  public doLogin(tokens : IToken) : void {
     //guardar los tokens
     this.srvTokens.setTokens(tokens);
     //actualizar datos globales para usuario y rol
@@ -57,7 +57,7 @@ export class AuthService {
     console.log("sesión", this.userActual)
 
   }
-  public doLogout() {
+  public doLogout() : void {
     //Eliminar tokens
     if (this.srvTokens.token) {
       this.srvTokens.eliminarTokens();

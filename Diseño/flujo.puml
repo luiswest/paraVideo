@@ -1,0 +1,47 @@
+@startuml flujo
+skinparam style strictuml
+skinparam sequenceMessageAlign center
+
+actor Cliente
+boundary "Interfaz (Web/Móvil)" as UI
+control "Controlador Reparaciones" as Ctrl
+entity "Orden de Reparación" as Orden
+database "Base de Datos" as DB
+
+Cliente -> UI : Consultar estado de reparación
+UI -> Ctrl : obtenerDetallesOrden(idOrden)
+activate Ctrl
+
+Ctrl -> DB : buscarOrden(idOrden)
+activate DB
+DB --> Ctrl : datosOrden + diagnostico + presupuesto
+deactivate DB
+
+Ctrl --> UI : mostrarInformación(presupuesto)
+deactivate Ctrl
+
+note right of Cliente : El cliente revisa los costos\ny el diagnóstico del mecánico.
+
+Cliente -> UI : Click en "Aprobar Presupuesto"
+activate UI
+
+UI -> Ctrl : confirmarAprobacion(idOrden)
+activate Ctrl
+
+Ctrl -> Orden : cambiarEstado(EN_REPARACION)
+activate Orden
+Orden --> Ctrl : estadoActualizado
+deactivate Orden
+
+Ctrl -> DB : guardarCambios(idOrden, nuevoEstado)
+activate DB
+DB --> Ctrl : confirmación exitosa
+deactivate DB
+
+Ctrl --> UI : mostrarMensaje("Reparación Iniciada")
+deactivate Ctrl
+
+UI --> Cliente : Notificación: Su auto está en proceso de reparación
+deactivate UI
+
+@endum

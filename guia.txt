@@ -1,0 +1,29 @@
+Si no se está logueado  (Oculto toda la barra del header)
+	- Ocultar botón de menú si no se está logueado (hamburguer)
+	- Ocultar cerrar sesión de menú
+	- Ocultar cambiar contraseña
+
+---------------------------------------------------------------------------------------------------
+
+- Fuera de video -
+Generar componentes vacíos para probar los subsiguientes videos
+	- oficinista
+	- administradores
+	- 	
+
+---------------------------------------------------------------------------------------------------
+
+Crear guardas   (Video Guards-1) (ng g guard
+	- generar auth-guard básico sin roles
+	- Mostrar ventana de login cuando se cierra sesión aunque la sesión está cerrada se deberá llamar dado que pudo haber cerrado por expiración de token
+
+---------------------------------------------------------------------------------------------------
+
+Guardas con roles (Video Guards-2)
+	- crear enumroles
+	- generar componentes 403 y 401 (puede que el 401 no sea necesario)	
+	- agregar roles a rutas
+	- modificar archivo auth-guard para agregar funcionalidad de roles
+	- agregar en app.html la funconalidad de roles en las opciones de menú (doble control)
+
+---------------------------------------------------------------------------------------------------

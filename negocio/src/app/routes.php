@@ -34,6 +34,7 @@ $app->group('/api', function(RouteCollectorProxy $api) {
         $api->group('/auth', function(RouteCollectorProxy $endpoint) {
         $endpoint->patch('', Auth::class . ':login');
         $endpoint->patch('/logout/{id}', Auth::class . ':logout');
+        $endpoint->patch('/refresh/{id}', Auth::class . ':refresh');
     });
 
 

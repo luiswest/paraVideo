@@ -18,7 +18,6 @@ class Auth extends ServicioCURL {
             $tokens = ["error" => "Credenciales incorrectas"];
             
         }
-
         $response->getBody()->write(json_encode($tokens));
         return $response
             ->withHeader('Content-Type','Application/json')
@@ -30,5 +29,23 @@ class Auth extends ServicioCURL {
 
         return $response
             ->withStatus($resp ? 200 : 401);
+    }
+    public function refresh(Request $request, Response $response, array $args) {
+        $body = json_decode($request->getBody());
+                 
+        $datos = $this->verificarToken($args['id'], $body->tkRef);        
+        
+        $body = json_decode($datos['body']);
+        $status = json_decode($datos['status']);
+     
+         if ($status === 200) {
+            $tokens = $this->generarToken($args['id'], $body->rol);
+            $this->modificarToken(cedula: $args['id'], tkRef: $tokens['tkRef']);
+
+            $response->getBody()->write(json_encode($tokens));
+        }
+       return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus($status);
     }
 }

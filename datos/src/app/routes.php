@@ -37,7 +37,7 @@ $app->group('/api', function(RouteCollectorProxy $api) {
     });
     $api->group('/token', function(RouteCollectorProxy $endpoint) {
         $endpoint->patch('/modificar', Token::class . ':modificarToken');
-        $endpoint->patch('/verificar', Token::class . ':verificarToken');
+        $endpoint->patch('/verificar/{id}', Token::class . ':verificarToken');
     });
 
     $api->group('/usuario', function(RouteCollectorProxy $endpoint) {

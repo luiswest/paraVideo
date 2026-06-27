@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, pattern, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +28,7 @@ export class FrmLogin {
   _form = form(this._obj, (s)=> {
     required(s.cedula, { message: 'Username is required' });
     required(s.passw, { message: 'Password is required' });
+    
   },
   { submission: {
        action: async f => {

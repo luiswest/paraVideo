@@ -40,4 +40,7 @@ export class TokensService {
     const helper = new JwtHelperService();
     return helper.isTokenExpired(this.token);
   }
+  public tiempoExpToken() : number {
+    return this.decodeToken().exp - (Date.now() / 1000);
+  }
 }

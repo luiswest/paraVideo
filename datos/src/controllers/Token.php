@@ -46,14 +46,23 @@ class Token {
 
     }
 
-    private function verificarToken(string $idUsuario, string $tkRef) {
+    public function verificarToken(Request $request, Response $response, array $args) {
+        $cedula = $args['id'];
+        $tkRef = json_decode($request->getBody())->tkRef;
         $sql = "SELECT rol FROM usuarios WHERE cedula = :cedula AND tkRef = :tkRef";
         $con = $this->container->get('base_datos');
         $query = $con->prepare($sql);
-        $query->execute(['cedula' => $idUsuario, 'tkRef' => $tkRef]);
-        $datos = $query->fetchColumn();
+        $query->execute(['cedula' => $cedula, 'tkRef' => $tkRef]);
+        
+        $datos = $query->fetch(PDO::FETCH_ASSOC);
+
+        $status = $query->rowCount() > 0 ? 200 : 401;
+        
         $query = null;
         $con = null;
-        return $datos;
+        $response->getBody()->write(json_encode($datos));
+        return $response
+            ->withHeader('Content-Type','Application/json')
+            ->withStatus($status); 
     }        
 }

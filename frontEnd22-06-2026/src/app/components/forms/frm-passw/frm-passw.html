@@ -7,7 +7,15 @@
             <div class="flex flex-col">
                 <mat-form-field appearance="fill" class="mt-4 mx-5">
                     <mat-label>Contraseña Actual</mat-label>
-                    <input type="password" matInput [formField]="frmPassw.passw" (focus)="mostrarError.set(false);">
+                    <input [type]="hide() ? 'password' : 'text'" matInput [formField]="frmPassw.passw" (focus)="mostrarError.set(false);">
+                     <button 
+                        mat-icon-button 
+                        matSuffix 
+                        (click)="toggleVisibility($event)" 
+                        [attr.aria-label]="'Ocultar contraseña'"
+                        [attr.aria-pressed]="!hide()">
+                        <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
                 </mat-form-field>
                 @if(frmPassw.passw().touched() && frmPassw.passw().invalid()) {
                     @for(error of frmPassw.passw().errors(); track error.kind ) {
@@ -36,11 +44,14 @@
             <mat-error class="text-center" [hidden]="!mostrarError()">Usuario o contraseña incorrecto</mat-error>
         </mat-card-content>
         
-        <mat-card-actions class="mb-5">
-            <button type="submit" matFab extended  class="flex flex-1 mx-7 bg-emerald-600! text-white!"
-                [disabled]="frmPassw().invalid()">
+        <mat-card-actions class="mb-5 flex justify-center">
+            <button type="submit" matFab class="me-5 px-15! bg-emerald-600! text-white!"
+                [disabled]="frmPassw().invalid() || frmPassw().submitting()">
                 Cambiar
             </button>
+            <button matFab class="bg-emerald-600! text-white! px-15!" mat-dialog-close>
+                Cancelar
+            </button>            
         </mat-card-actions>
     </mat-card>
 </form>

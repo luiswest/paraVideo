@@ -1,4 +1,4 @@
-@host = http://localhost:8000/api
+@host = http://localhost:9000/api
 @uri = {{host}}/auth
 
 PATCH {{uri}} 
@@ -14,3 +14,10 @@ Content-Type: application/json
 DELETE {{uri}}/1999-8888
 
 ###
+
+PATCH {{uri}}/refresh/1999-8888
+Content-Type: application/json
+
+{
+    "tkR" : "1999-8888" 
+}
